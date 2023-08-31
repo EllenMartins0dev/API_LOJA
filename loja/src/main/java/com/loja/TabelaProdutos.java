@@ -22,4 +22,17 @@ public class TabelaProdutos {
         this.produtos.add(caderno);
     }
 
+    public List<Produto> getProdutos() {
+        return produtos;
+    }
+
+    /**
+     * Método que retorna todos os produtos da lista
+     * (é redundante, mas foi feito pra explicar a funcionalidade)
+     */
+
+    public List<Produto> buscarTodosOsProdutos() {
+        return this.getProdutos();
+
+    }
 }
