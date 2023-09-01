@@ -1,5 +1,8 @@
 package com.loja;
 
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,13 +44,14 @@ public class TabelaProdutos {
     /**
      * Busca o produto pelo id (faz um for para passar por toda a lista de produtos e procurar, sendo "p" o produto da lista)
      * Caso não encontre, retorna null
+     *
      * @param produtoId
      * @return
      */
 
     public Produto buscarProdutoPeloId(int produtoId) {
         Produto produtoProcurado = null;
-        for (Produto p: this.produtos) {
+        for (Produto p : this.produtos) {
             if (p.getId() == produtoId) {
                 produtoProcurado = p;
                 break;
@@ -56,5 +60,20 @@ public class TabelaProdutos {
         return produtoProcurado;
     }
 
+    public Produto cadastrarNovoProduto(Produto novoProduto) {
+        // O -1 serve pra pegar o último index (tem 6 valores mas o index (posição) vai de 0 à 5)
+        int ultimoIndex = this.produtos.size() -1;
+        // Pega o último produto pelo index (id = 6)
+        Produto ultimoProduto = this.produtos.get(ultimoIndex);
+        // O próximo id (6) é o último id mais 1 (id = 7)
+        int proximoId = ultimoProduto.getId() + 1;
+        /**
+         * Outra forma pra economizar linha:
+         * int id = this.produtos.get(this.produtos.size() - 1).getId() + 1
+         */
+        novoProduto.setId(proximoId);
+        this.produtos.add(novoProduto);
+        return novoProduto;
+    }
 
 }
