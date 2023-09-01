@@ -1,6 +1,7 @@
 package com.loja;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,5 +21,17 @@ public class ProdutoController {
     @GetMapping
     public List<Produto> buscarTodosOsProdutosDaLoja() {
         return this.tabelaProdutos.buscarTodosOsProdutos();
+    }
+
+    // Coloca entre aspas porque é String (vem da internet), coloca a barra pra deixar mais "bonito"
+
+    @GetMapping("/{produtoId}")
+    /**
+     * ("Path" é caminho em inglês, "Variable" é variável, então é o caminho da variável)
+     * @PathVariable pega a variável (id) e passa pra esse método
+     */
+    public Produto buscarProdutoPeloIdNaLoja(@PathVariable int produtoId) {
+        Produto produtoProcurado = this.tabelaProdutos.buscarProdutoPeloId(produtoId);
+        return produtoProcurado;
     }
 }
